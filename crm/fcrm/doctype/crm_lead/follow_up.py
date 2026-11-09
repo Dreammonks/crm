@@ -45,7 +45,8 @@ def on_update(lead, method=None) -> None:
 
 def send_due_reminders() -> None:
 	now = now_datetime()
-	horizon = add_to_date(now, minutes=max(map(advance_minutes, ADVANCE_SETTING)))
+	longest_advance = max(advance_minutes(follow_up_type) for follow_up_type in ADVANCE_SETTING)
+	horizon = add_to_date(now, minutes=longest_advance)
 	leads = frappe.get_all(
 		"CRM Lead",
 		filters=[
