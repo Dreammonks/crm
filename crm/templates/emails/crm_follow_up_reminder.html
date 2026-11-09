@@ -1,0 +1,55 @@
+{% set heading = "margin: 0 0 8px; font-weight: 700" %}
+{% set divider = "border-top: 1px solid #d9d9d9; margin: 16px 0" %}
+{% set button = "display: block; margin-top: 8px; padding: 12px; background: #171717; color: #ffffff; text-align: center; text-decoration: none; border-radius: 6px; font-weight: 700" %}
+<div style="font-size: 15px; line-height: 1.5">
+	<p style="margin: 0; font-weight: 700">{{ _("AUSHADHI CRM | FOLLOW-UP ALERT") }}</p>
+	<div style="{{ divider }}"></div>
+
+	<p style="margin: 0; font-weight: 700">
+		⏰
+		{% if is_visit %}
+		{{ _("UPCOMING PHARMACY VISIT IN {0} MINUTES").format(minutes_left) }}
+		{% else %}
+		{{ _("UPCOMING CALL IN {0} MINUTES").format(minutes_left) }}
+		{% endif %}
+	</p>
+	<p style="margin: 0">{{ _("Target Time:") }} {{ when }}</p>
+	<div style="{{ divider }}"></div>
+
+	<p style="{{ heading }}">{{ _("STORE DETAILS") if is_visit else _("CONTACT DETAILS") }}</p>
+	<p style="margin: 0">
+		{{ _("Pharmacy:") if is_visit else _("Name:") }}
+		<strong>{{ (lead.organization or lead.lead_name) | e }}</strong>
+		{% if lead.organization and lead.lead_name != lead.organization %}
+		<br />{{ _("Contact:") }} {{ lead.lead_name | e }}{% if lead.job_title %} ({{ lead.job_title | e }}){% endif %}
+		{% endif %}
+	</p>
+	{% if phone %}
+	<p style="margin: 0">{{ _("Mobile:") }} {{ phone | e }}</p>
+	<a href="{{ tel_link }}" style="{{ button }}">📞 {{ _("TAP TO CALL") }}</a>
+	{% endif %}
+
+	{% if is_visit %}
+	<div style="{{ divider }}"></div>
+	<p style="{{ heading }}">{{ _("STORE LOCATION") }}</p>
+	<p style="margin: 0">
+		{% for line in [lead.address_line, lead.area, lead.pincode] if line %}
+		{{ line | e | replace("\n", "<br />") }}<br />
+		{% else %}
+		{{ _("No address on this lead.") }}<br />
+		{% endfor %}
+	</p>
+	{% if maps_link %}
+	<a href="{{ maps_link }}" style="{{ button }}">🗺️ {{ _("OPEN IN GOOGLE MAPS") }}</a>
+	{% endif %}
+	{% endif %}
+
+	{% if lead.follow_up_notes %}
+	<div style="{{ divider }}"></div>
+	<p style="{{ heading }}">{{ _("PREVIOUS NOTES / CONTEXT") }}</p>
+	<p style="margin: 0">{{ lead.follow_up_notes | e | replace("\n", "<br />") }}</p>
+	{% endif %}
+
+	<div style="{{ divider }}"></div>
+	<a href="{{ lead_url }}" style="{{ button }}">📂 {{ _("OPEN LEAD IN CRM") }}</a>
+</div>
