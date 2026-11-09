@@ -29,7 +29,11 @@
   "favicon",
   "dropdown_items_tab",
   "dropdown_items",
-  "setup_completed"
+  "setup_completed",
+  "follow_ups_tab",
+  "call_reminder_advance_minutes",
+  "visit_reminder_advance_minutes",
+  "fallback_sales_notification_email"
  ],
  "fields": [
   {
@@ -184,12 +188,38 @@
    "fieldtype": "Check",
    "hidden": 1,
    "label": "Setup Completed"
+  },
+  {
+   "fieldname": "follow_ups_tab",
+   "fieldtype": "Tab Break",
+   "label": "Follow-ups"
+  },
+  {
+   "default": "15",
+   "fieldname": "call_reminder_advance_minutes",
+   "fieldtype": "Select",
+   "label": "Call Reminder (minutes before)",
+   "options": "5\n10\n15\n20"
+  },
+  {
+   "default": "30",
+   "fieldname": "visit_reminder_advance_minutes",
+   "fieldtype": "Select",
+   "label": "Visit Reminder (minutes before)",
+   "options": "20\n30\n45\n60"
+  },
+  {
+   "description": "Receives reminders for leads with no active owner",
+   "fieldname": "fallback_sales_notification_email",
+   "fieldtype": "Data",
+   "label": "Fallback Notification Email",
+   "options": "Email"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-09-28 07:10:34.454744",
+ "modified": "2026-11-08 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "FCRM",
  "name": "FCRM Settings",

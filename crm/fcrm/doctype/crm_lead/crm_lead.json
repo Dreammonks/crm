@@ -77,7 +77,16 @@
   "facebook_form_id",
   "lost_details_tab",
   "lost_reason",
-  "lost_notes"
+  "lost_notes",
+  "follow_up_tab",
+  "follow_up_type",
+  "follow_up_date_time",
+  "follow_up_notes",
+  "follow_up_notification_sent",
+  "address_section",
+  "address_line",
+  "area",
+  "pincode"
  ],
  "fields": [
   {
@@ -474,13 +483,66 @@
    "fieldtype": "Data",
    "label": "Facebook",
    "no_copy": 1
+  },
+  {
+   "fieldname": "follow_up_tab",
+   "fieldtype": "Tab Break",
+   "label": "Follow-up"
+  },
+  {
+   "default": "Phone Call",
+   "fieldname": "follow_up_type",
+   "fieldtype": "Select",
+   "label": "Follow-up Type",
+   "mandatory_depends_on": "eval:doc.follow_up_date_time",
+   "options": "Phone Call\nPharmacy Visit"
+  },
+  {
+   "fieldname": "follow_up_date_time",
+   "fieldtype": "Datetime",
+   "label": "Follow-up At",
+   "search_index": 1
+  },
+  {
+   "fieldname": "follow_up_notes",
+   "fieldtype": "Small Text",
+   "label": "Follow-up Notes"
+  },
+  {
+   "default": "0",
+   "fieldname": "follow_up_notification_sent",
+   "fieldtype": "Check",
+   "label": "Follow-up Notification Sent",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "address_section",
+   "fieldtype": "Section Break",
+   "label": "Address"
+  },
+  {
+   "description": "Building, street, landmark",
+   "fieldname": "address_line",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Data",
+   "label": "City / Area"
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Pincode"
   }
  ],
  "grid_page_length": 50,
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-10 05:00:00.000000",
+ "modified": "2026-11-08 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "FCRM",
  "name": "CRM Lead",

@@ -152,7 +152,11 @@ import AssignTo from '@/components/AssignTo.vue'
 import SidePanelLayout from '@/components/SidePanelLayout.vue'
 import SLASection from '@/components/SLASection.vue'
 import CustomActions from '@/components/CustomActions.vue'
-import { setupCustomizations, isTranslatable } from '@/utils'
+import {
+  setupCustomizations,
+  isTranslatable,
+  warnIfVisitHasNoAddress,
+} from '@/utils'
 import { getView } from '@/utils/view'
 import { getSettings } from '@/stores/settings'
 import { globalStore } from '@/stores/global'
@@ -434,6 +438,7 @@ function beforeStatusChange(data) {
   }
 }
 function reloadAssignees(data) {
+  warnIfVisitHasNoAddress(doc.value, data)
   if (Object.hasOwn(data ?? {}, 'lead_owner')) {
     assignees.reload()
   }
