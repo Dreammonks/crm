@@ -414,6 +414,20 @@ export async function setupListCustomizations(data, obj = {}) {
   return { actions, bulkActions }
 }
 
+export function warnIfVisitHasNoAddress(lead, changedFields) {
+  const isScheduleChange = ['follow_up_type', 'follow_up_date_time'].some(
+    (field) => Object.hasOwn(changedFields ?? {}, field),
+  )
+  if (
+    isScheduleChange &&
+    lead.follow_up_type === 'Pharmacy Visit' &&
+    lead.follow_up_date_time &&
+    (!lead.address_line || !lead.pincode)
+  ) {
+    toast.warning(__('Address or pincode is missing for this pharmacy visit'))
+  }
+}
+
 export function copyToClipboard(text) {
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text).then(showSuccessAlert)

@@ -291,7 +291,11 @@ doc_events = {
 		],
 	},
 	"CRM Lead": {
-		"on_update": ["crm.automation.events.on_lead_update"],
+		"validate": ["crm.fcrm.doctype.crm_lead.follow_up.validate"],
+		"on_update": [
+			"crm.automation.events.on_lead_update",
+			"crm.fcrm.doctype.crm_lead.follow_up.on_update",
+		],
 	},
 	"Sales Order": {
 		"before_validate": [
@@ -350,6 +354,7 @@ scheduler_events = {
 	"hourly_long": ["crm.lead_syncing.background_sync.sync_leads_from_sources_hourly"],
 	"monthly_long": ["crm.lead_syncing.background_sync.sync_leads_from_sources_monthly"],
 	"cron": {
+		"* * * * *": ["crm.fcrm.doctype.crm_lead.follow_up.send_due_reminders"],
 		"*/5 * * * *": ["crm.lead_syncing.background_sync.sync_leads_from_sources_5_minutes"],
 		"*/10 * * * *": ["crm.lead_syncing.background_sync.sync_leads_from_sources_10_minutes"],
 		"*/15 * * * *": ["crm.lead_syncing.background_sync.sync_leads_from_sources_15_minutes"],

@@ -31,16 +31,19 @@ class FCRMSettings(Document):
 		auto_update_expected_deal_value: DF.Check
 		brand_logo: DF.Attach | None
 		brand_name: DF.Data | None
+		call_reminder_advance_minutes: DF.Literal["5", "10", "15", "20"]
 		currency: DF.Link | None
 		default_calendar_view: DF.Literal["Daily", "Weekly", "Monthly"]
 		dropdown_items: DF.Table[CRMDropdownItem]
 		enable_forecasting: DF.Check
 		event_notifications: DF.Table[EventNotifications]
+		fallback_sales_notification_email: DF.Data | None
 		favicon: DF.Attach | None
 		service_provider: DF.Literal[
 			"frankfurter.app", "fawazahmed-exchange-api", "exchangerate.host", "exchangerate-api"
 		]
 		update_timestamp_on_new_communication: DF.Check
+		visit_reminder_advance_minutes: DF.Literal["20", "30", "45", "60"]
 	# end: auto-generated types
 
 	@frappe.whitelist()

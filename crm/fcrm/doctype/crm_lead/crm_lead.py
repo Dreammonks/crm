@@ -34,7 +34,9 @@ class CRMLead(Document):
 		)
 		from crm.fcrm.doctype.crm_status_change_log.crm_status_change_log import CRMStatusChangeLog
 
+		address_line: DF.SmallText | None
 		annual_revenue: DF.Currency
+		area: DF.Data | None
 		communication_status: DF.Link | None
 		converted: DF.Check
 		email: DF.Data | None
@@ -43,6 +45,10 @@ class CRMLead(Document):
 		first_name: DF.Data
 		first_responded_on: DF.Datetime | None
 		first_response_time: DF.Duration | None
+		follow_up_date_time: DF.Datetime | None
+		follow_up_notes: DF.SmallText | None
+		follow_up_notification_sent: DF.Check
+		follow_up_type: DF.Literal["Phone Call", "Pharmacy Visit"]
 		gender: DF.Link | None
 		image: DF.AttachImage | None
 		industry: DF.Link | None
@@ -63,6 +69,7 @@ class CRMLead(Document):
 		no_of_employees: DF.Literal["1-10", "11-50", "51-200", "201-500", "501-1000", "1000+"]
 		organization: DF.Data | None
 		phone: DF.Data | None
+		pincode: DF.Data | None
 		products: DF.Table[CRMProducts]
 		response_by: DF.Datetime | None
 		rolling_responses: DF.Table[CRMRollingResponseTime]

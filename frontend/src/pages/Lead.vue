@@ -277,6 +277,7 @@ import {
   copyToClipboard,
   validateIsImageFile,
   isTranslatable,
+  warnIfVisitHasNoAddress,
 } from '@/utils'
 import { getView } from '@/utils/view'
 import { getSettings } from '@/stores/settings'
@@ -707,6 +708,7 @@ function onEnriched() {
 }
 
 function reloadResources(data) {
+  warnIfVisitHasNoAddress(doc.value, data)
   if (Object.hasOwn(data ?? {}, 'lead_owner')) {
     assignees.reload()
   }
